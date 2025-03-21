@@ -3,7 +3,6 @@ package ca.mcmaster.se2aa4.island.teamXXX;
 import java.io.StringReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import eu.ace_design.island.bot.IExplorerRaid;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -14,38 +13,32 @@ public class Explorer implements IExplorerRaid {
 
     @Override
     public void initialize(String s) {
-        logger.info("** Initializing the Exploration Command Center");
+        // Parse the initialization JSON input (e.g., {"budget":10000, "heading":"W"})
         JSONObject info = new JSONObject(new JSONTokener(new StringReader(s)));
-        logger.info("** Initialization info:\n {}",info.toString(2));
         String direction = info.getString("heading");
-        Integer batteryLevel = info.getInt("budget");
-        logger.info("The drone is facing {}", direction);
-        logger.info("Battery level is {}", batteryLevel);
+        int batteryLevel = info.getInt("budget");
+        logger.info("Initializing Explorer with heading {} and battery level {}", direction, batteryLevel);
     }
 
     @Override
     public String takeDecision() {
+        // Walking skeleton: immediately stop exploration.
         JSONObject decision = new JSONObject();
-        decision.put("action", "stop"); // we stop the exploration immediately
-        logger.info("** Decision: {}",decision.toString());
+        decision.put("action", "stop");
+        logger.info("Decision taken: {}", decision.toString());
         return decision.toString();
     }
 
     @Override
     public void acknowledgeResults(String s) {
+        // Log the response (minimal handling).
         JSONObject response = new JSONObject(new JSONTokener(new StringReader(s)));
-        logger.info("** Response received:\n"+response.toString(2));
-        Integer cost = response.getInt("cost");
-        logger.info("The cost of the action was {}", cost);
-        String status = response.getString("status");
-        logger.info("The status of the drone is {}", status);
-        JSONObject extraInfo = response.getJSONObject("extras");
-        logger.info("Additional information received: {}", extraInfo);
+        logger.info("Response received: {}", response.toString(2));
     }
 
     @Override
     public String deliverFinalReport() {
-        return "no creek found";
+        // Minimal final report.
+        return "Rescue mission walking skeleton complete: Drone initialized and stopped.";
     }
-
 }

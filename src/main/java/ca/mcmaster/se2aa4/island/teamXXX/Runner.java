@@ -1,7 +1,6 @@
 package ca.mcmaster.se2aa4.island.teamXXX;
 
 import static eu.ace_design.island.runner.Runner.run;
-
 import java.io.File;
 
 public class Runner {
@@ -17,7 +16,7 @@ public class Runner {
                     .withCrew(5)
                     .collecting(1000, "WOOD")
                     .storingInto("./outputs")
-                    .withName("Island")
+                    .withName("RescueMission")
                     .fire();
         } catch(Exception e) {
             System.err.println(e.getMessage());
@@ -25,5 +24,4 @@ public class Runner {
             System.exit(1);
         }
     }
-
 }
