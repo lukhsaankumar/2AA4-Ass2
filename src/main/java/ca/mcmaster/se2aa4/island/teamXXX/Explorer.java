@@ -13,16 +13,17 @@ public class Explorer implements IExplorerRaid {
 
     @Override
     public void initialize(String s) {
-        // Parse the initialization JSON input (e.g., {"budget":10000, "heading":"W"})
+        // Parse initialization JSON (e.g., {"budget":10000, "heading":"E"})
+        logger.info("Initializing Rescue Mission Command Center");
         JSONObject info = new JSONObject(new JSONTokener(new StringReader(s)));
         String direction = info.getString("heading");
         int batteryLevel = info.getInt("budget");
-        logger.info("Initializing Explorer with heading {} and battery level {}", direction, batteryLevel);
+        logger.info("Drone initialized: Heading = {}, Battery Level = {}", direction, batteryLevel);
     }
 
     @Override
     public String takeDecision() {
-        // Walking skeleton: immediately stop exploration.
+        // Minimal working decision: stop the mission immediately.
         JSONObject decision = new JSONObject();
         decision.put("action", "stop");
         logger.info("Decision taken: {}", decision.toString());
@@ -31,14 +32,14 @@ public class Explorer implements IExplorerRaid {
 
     @Override
     public void acknowledgeResults(String s) {
-        // Log the response (minimal handling).
+        // Log any results received from the drone.
         JSONObject response = new JSONObject(new JSONTokener(new StringReader(s)));
-        logger.info("Response received: {}", response.toString(2));
+        logger.info("Acknowledging results:\n{}", response.toString(2));
     }
 
     @Override
     public String deliverFinalReport() {
-        // Minimal final report.
-        return "Rescue mission walking skeleton complete: Drone initialized and stopped.";
+        // Return a minimal final report.
+        return "Rescue Mission Walking Skeleton: No creek found.";
     }
 }
