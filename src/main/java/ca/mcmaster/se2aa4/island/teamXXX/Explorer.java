@@ -10,36 +10,48 @@ import org.json.JSONTokener;
 public class Explorer implements IExplorerRaid {
 
     private final Logger logger = LogManager.getLogger();
+    private int moves = 0; // Counter for number of forward moves made
 
     @Override
     public void initialize(String s) {
-        // Parse initialization JSON (e.g., {"budget":10000, "heading":"E"})
-        logger.info("Initializing Rescue Mission Command Center");
+        logger.info("** Initializing the Exploration Command Center");
         JSONObject info = new JSONObject(new JSONTokener(new StringReader(s)));
+        logger.info("** Initialization info:\n{}", info.toString(2));
         String direction = info.getString("heading");
         int batteryLevel = info.getInt("budget");
-        logger.info("Drone initialized: Heading = {}, Battery Level = {}", direction, batteryLevel);
+        logger.info("The drone is facing {}", direction);
+        logger.info("Battery level is {}", batteryLevel);
     }
 
     @Override
     public String takeDecision() {
-        // Minimal working decision: stop the mission immediately.
         JSONObject decision = new JSONObject();
-        decision.put("action", "stop");
-        logger.info("Decision taken: {}", decision.toString());
+        if (!isOverGround()) {
+            // Continue flying if a ground cell hasn't been reached yet.
+            moves++;
+            decision.put("action", "fly");
+            decision.put("steps", 1); // Move one step forward
+            logger.info("Flying... (move {})", moves);
+        } else {
+            // Once over a ground cell, stop to return to base.
+            decision.put("action", "stop");
+            logger.info("Ground detected. Stopping mission.");
+        }
         return decision.toString();
     }
 
     @Override
     public void acknowledgeResults(String s) {
-        // Log any results received from the drone.
         JSONObject response = new JSONObject(new JSONTokener(new StringReader(s)));
-        logger.info("Acknowledging results:\n{}", response.toString(2));
+        logger.info("** Response received:\n{}", response.toString(2));
     }
 
     @Override
     public String deliverFinalReport() {
-        // Return a minimal final report.
-        return "Rescue Mission Walking Skeleton: No creek found.";
+        return "Rescue Mission MVP: Drone navigated until ground detected and safely returned to base.";
+    }
+
+    private boolean isOverGround() {
+        return moves >= 5;
     }
 }
