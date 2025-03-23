@@ -1,11 +1,11 @@
 package ca.mcmaster.se2aa4.island.teamXXX;
 
-public class coordinate {
+public class Coordinate {
 
     private int x;
     private int y;
 
-    public coordinate(int xCoordinate, int yCoordinate){
+    public Coordinate(int xCoordinate, int yCoordinate){
         this.x = xCoordinate;
         this.y = yCoordinate;
     }
