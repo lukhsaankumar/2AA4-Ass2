@@ -6,6 +6,7 @@ public class Drone{
 
     private Compass inDir;
     private Compass direct;
+
     
     public Drone(Integer charge, String dir){
         Compass compass = Compass.NORTH;
