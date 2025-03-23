@@ -58,21 +58,4 @@ public class Explorer implements IExplorerRaid {
         return moves >= 5;
     }
 
-    private void updatePosition() {
-        switch (direction) {
-            case "NORTH": y--; break;
-            case "SOUTH": y++; break;
-            case "EAST":  x++; break;
-            case "WEST":  x--; break;
-        }
-    }
-
-    private void updateDirection() {
-        switch (direction) {
-            case "NORTH": direction = "EAST"; break;
-            case "EAST": direction = "SOUTH"; break;
-            case "SOUTH": direction = "WEST"; break;
-            case "WEST": direction = "NORTH"; break;
-        }
-    }
 }
