@@ -9,11 +9,9 @@ import org.json.JSONTokener;
 
 public class Explorer implements IExplorerRaid {
 
-    private String direction;
-    private int x = 1, y = 1;
-
     private final Logger logger = LogManager.getLogger();
     private int moves = 0; // Counter for number of forward moves made
+    private Drone drone;
 
     @Override
     public void initialize(String s) {
@@ -22,6 +20,7 @@ public class Explorer implements IExplorerRaid {
         logger.info("** Initialization info:\n{}", info.toString(2));
         String direction = info.getString("heading");
         int batteryLevel = info.getInt("budget");
+        drone  = new Drone(batteryLevel,direction);
         logger.info("The drone is facing {}", direction);
         logger.info("Battery level is {}", batteryLevel);
     }
