@@ -14,4 +14,6 @@ public class Battery {
     public int getCharge() {
         return charge;
     }
+
+    
 }
