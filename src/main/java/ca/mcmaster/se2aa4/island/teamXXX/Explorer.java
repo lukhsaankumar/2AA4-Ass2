@@ -9,6 +9,9 @@ import org.json.JSONTokener;
 
 public class Explorer implements IExplorerRaid {
 
+    private String direction;
+    private int x = 1, y = 1;
+
     private final Logger logger = LogManager.getLogger();
     private int moves = 0; // Counter for number of forward moves made
 
@@ -53,5 +56,23 @@ public class Explorer implements IExplorerRaid {
 
     private boolean isOverGround() {
         return moves >= 5;
+    }
+
+    private void updatePosition() {
+        switch (direction) {
+            case "NORTH": y--; break;
+            case "SOUTH": y++; break;
+            case "EAST":  x++; break;
+            case "WEST":  x--; break;
+        }
+    }
+
+    private void updateDirection() {
+        switch (direction) {
+            case "NORTH": direction = "EAST"; break;
+            case "EAST": direction = "SOUTH"; break;
+            case "SOUTH": direction = "WEST"; break;
+            case "WEST": direction = "NORTH"; break;
+        }
     }
 }
