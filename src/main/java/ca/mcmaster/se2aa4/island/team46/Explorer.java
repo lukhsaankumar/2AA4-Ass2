@@ -53,9 +53,9 @@ public class Explorer implements IExplorerRaid {
         logger.info("** Response received:\n{}", response.toString(2));
     }
 
-    @Override
+    @Override 
     public String deliverFinalReport() {
-        return "Rescue Mission MVP: Drone navigated until ground detected and safely returned to base.";
+        return "Rescue Mission MVP! : Drone navigated until ground detected and safely returned to base.";
     }
 
     private boolean isOverGround() {
