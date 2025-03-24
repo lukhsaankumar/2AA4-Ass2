@@ -1,49 +1,46 @@
-package ca.mcmaster.se2aa4.island.team46.Drone;
+package ca.mcmaster.se2aa4.island.team46;
 
 import java.util.EnumMap;
 import java.util.Map;
 import ca.mcmaster.se2aa4.island.team46.Enums.Direction.Compass;
 
-// GPS system for handling the drone's directional movement
-public class  {
+
+public class Navigator {
 
     private final Map<Compass, Compass> rightTurns;
     private final Map<Compass, Compass> leftTurns;
     private final Map<Compass, int[]> movements;
 
-    public Gps() {
-        // Initialize directional mappings using EnumMap for efficiency
-        this.rightTurns = new EnumMap<>(CardinalDirection.class);
-        this.rightTurns.put(CardinalDirection.N, CardinalDirection.E);
-        this.rightTurns.put(CardinalDirection.E, CardinalDirection.S);
-        this.rightTurns.put(CardinalDirection.S, CardinalDirection.W);
-        this.rightTurns.put(CardinalDirection.W, CardinalDirection.N);
+    public Navigator() {
+    
+        this.rightTurns = new EnumMap<>(Compass.class);
+        this.rightTurns.put(Compass.N, Compass.E);
+        this.rightTurns.put(Compass.E, Compass.S);
+        this.rightTurns.put(Compass.S, Compass.W);
+        this.rightTurns.put(Compass.W, Compass.N);
 
-        this.leftTurns = new EnumMap<>(CardinalDirection.class);
-        this.leftTurns.put(CardinalDirection.N, CardinalDirection.W);
-        this.leftTurns.put(CardinalDirection.W, CardinalDirection.S);
-        this.leftTurns.put(CardinalDirection.S, CardinalDirection.E);
-        this.leftTurns.put(CardinalDirection.E, CardinalDirection.N);
+        this.leftTurns = new EnumMap<>(Compass.class);
+        this.leftTurns.put(Compass.N, Compass.W);
+        this.leftTurns.put(Compass.W, Compass.S);
+        this.leftTurns.put(Compass.S, Compass.E);
+        this.leftTurns.put(Compass.E, Compass.N);
 
-        this.movements = new EnumMap<>(CardinalDirection.class);
-        this.movements.put(CardinalDirection.N, new int[]{0, 1});  // Move up
-        this.movements.put(CardinalDirection.S, new int[]{0, -1}); // Move down
-        this.movements.put(CardinalDirection.E, new int[]{1, 0});  // Move right
-        this.movements.put(CardinalDirection.W, new int[]{-1, 0}); // Move left
+        this.movements = new EnumMap<>(Compass.class);
+        this.movements.put(Compass.N, new int[]{0, 1});  
+        this.movements.put(Compass.S, new int[]{0, -1}); 
+        this.movements.put(Compass.E, new int[]{1, 0});  
+        this.movements.put(Compass.W, new int[]{-1, 0}); 
     }
 
-    // Get the direction when turning right
-    public CardinalDirection getRight(CardinalDirection currHeading) {
-        return rightTurns.get(currHeading);
+    public Compass getRight(Compass currDirection) {
+        return rightTurns.get(currDirection);
     }
 
-    // Get the direction when turning left
-    public CardinalDirection getLeft(CardinalDirection currHeading) {
-        return leftTurns.get(currHeading);
+    public Compass getLeft(Compass currDirection){
+        return leftTurns.get(currDirection);
     }
 
-    // Get the movement when moving forward
-    public int[] getForwardMovement(CardinalDirection currHeading) {
-        return movements.get(currHeading);
+    public int[] getForwardMovement(Compass currDirection) {
+        return movements.get(currDirection);
     }
 }
