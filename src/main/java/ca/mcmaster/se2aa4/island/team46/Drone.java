@@ -2,7 +2,7 @@ package ca.mcmaster.se2aa4.island.team46;
 
 import ca.mcmaster.se2aa4.island.team46.Interface.Commands;
 
-public class Drone implements Commands {
+public class Drone {
     private Battery battery;
     private int cost;
 
@@ -10,6 +10,8 @@ public class Drone implements Commands {
 
     public Drone(Integer charge, String startPosition){
         this.battery = new Battery(charge);
+
+        
     }
     
 }
