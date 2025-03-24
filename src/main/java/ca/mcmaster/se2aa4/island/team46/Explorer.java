@@ -38,15 +38,17 @@ public class Explorer implements IExplorerRaid {
             decision = droneCommands.fly();
             decision.put("steps", 1); // Move one step forward
             logger.info("Flying... (move {})", moves);
-        } 
-        else {
+            
+            // Debugging: Ensure decision JSON is properly formatted
+            logger.debug("Decision JSON: {}", decision.toString());
+    
+        } else {
             // Once over a ground cell, stop to return to base.
-            decision= droneCommands.stop();
+            decision = droneCommands.stop();
             logger.info("Ground detected. Stopping mission.");
         }
         return decision.toString();
     }
-
     @Override
     public void acknowledgeResults(String s) {
         JSONObject response = new JSONObject(new JSONTokener(new StringReader(s)));
