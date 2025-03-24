@@ -7,10 +7,15 @@ import eu.ace_design.island.bot.IExplorerRaid;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import ca.mcmaster.se2aa4.island.team46.Enums.Direction.Compass;
+
 public class Explorer implements IExplorerRaid {
 
     private final Logger logger = LogManager.getLogger();
     private int moves = 0; // Counter for number of forward moves made
+    private DroneCommands droneCommands = new DroneCommands();
+    private DetectLand detectLand = new DetectLand();
+    
 
 
     @Override
@@ -30,13 +35,13 @@ public class Explorer implements IExplorerRaid {
         if (!isOverGround()) {
             // Continue flying if a ground cell hasn't been reached yet.
             moves++;
-            decision.put("action", "fly");
+            decision = droneCommands.fly();
             decision.put("steps", 1); // Move one step forward
             logger.info("Flying... (move {})", moves);
         } 
         else {
             // Once over a ground cell, stop to return to base.
-            decision.put("action", "stop");
+            decision= droneCommands.stop();
             logger.info("Ground detected. Stopping mission.");
         }
         return decision.toString();
@@ -54,7 +59,15 @@ public class Explorer implements IExplorerRaid {
     }
 
     private boolean isOverGround() {
-        return moves >= 5;
+       JSONObject decision = new JSONObject();
+       decision = droneCommands.echo(Compass.N);
+       if (detectLand.locatedGround(decision)){
+         return true;
+       }
+       else{
+        return false;
+       }
+
     }
 
 }
