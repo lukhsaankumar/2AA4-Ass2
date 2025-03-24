@@ -7,7 +7,7 @@ public class Drone{
     private Compass inDir;
     private Compass direct;
     private Battery battery;
-    private DroneState droneState = DroneState.FINDING;
+   
 
     
     public Drone(Integer charge, String dir){
