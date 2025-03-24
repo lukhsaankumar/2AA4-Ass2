@@ -1,1 +1,1 @@
-package ca.mcmaster.se2aa4.island.team46.interface;
+package ca.mcmaster.se2aa4.island.team46.Interface;
