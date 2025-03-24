@@ -34,7 +34,8 @@ public class Explorer implements IExplorerRaid {
             decision.put("action", "fly");
             decision.put("steps", 1); // Move one step forward
             logger.info("Flying... (move {})", moves);
-        } else {
+        } 
+        else {
             // Once over a ground cell, stop to return to base.
             decision.put("action", "stop");
             logger.info("Ground detected. Stopping mission.");
