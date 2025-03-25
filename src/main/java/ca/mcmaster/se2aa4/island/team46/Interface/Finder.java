@@ -5,8 +5,7 @@ import org.json.JSONObject;
 public abstract class Finder {
 
     private Commands observer;
-
-
+    
         protected void update(JSONObject decision) {
             if (observer != null) {
                 observer.addCommand(decision);
