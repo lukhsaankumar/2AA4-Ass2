@@ -7,14 +7,26 @@ public class Battery {
 
 
     public Battery(int initialCharge){
-        this.initialCharge = initialCharge;
+        if (initialCharge >= 0){
+            this.initialCharge = initialCharge;
         this.charge  = initialCharge;
+        }
+        else{
+            throw new IllegalArgumentException("Initial Capactiy cannot be negative"); //Handle the exception where the  initial charge cannot be negative
+        }
+        
     }
 
 
     public int drainBattery(int cost){
-        this.charge -= cost;
-        return this.charge;
+        if (cost > this.charge){
+            throw new IllegalArgumentException("Not enough charge the perform task"); //Handle where the cost of charge needed to action is less than the intial charge
+        }
+        else{
+            this.charge -= cost;
+             return this.charge;
+        }
+
     }
 
 
